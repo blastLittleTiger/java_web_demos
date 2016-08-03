@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+    <!--欢迎页面-->
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+    <!--1-->
+    <!--定义Filter本身-->
+    <filter>
+        <!--filter名字-->
+        <filter-name>Filter</filter-name>
+        <!--filter所在的完整类名-->
+        <filter-class>filterdemo.Filter</filter-class>
+    </filter>
+    <!--配置映射关系-->
+    <filter-mapping>
+        <!--filter名字-->
+        <filter-name>Filter</filter-name>
+        <!--指令filter过滤URL-->
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!--2-->
+    <!--定义Filter本身-->
+    <filter>
+        <!--filter名字-->
+        <filter-name>FirstFilter</filter-name>
+        <!--filter所在的完整类名-->
+        <filter-class>filterdemo.FirstFilter</filter-class>
+        <!--filter之中的初始化参数-->
+        <init-param>
+            <!--参数名-->
+            <param-name>ip</param-name>
+            <!--参数值，此处为了配合FirstFilter来测试禁止访问的功能-->
+            <param-value>127.0.0.1</param-value>
+        </init-param>
+    </filter>
+    <!--配置映射关系-->
+    <filter-mapping>
+        <!--filter名字-->
+        <filter-name>FirstFilter</filter-name>
+        <!--指令filter过滤URL-->
+        <url-pattern>/demo/*</url-pattern>
+    </filter-mapping>
+
+
+    <!--Servlet配置信息-->
+    <servlet>
+        <!--servlet的名字-->
+        <servlet-name>FirstServlet</servlet-name>
+        <!--servlet所在的的完整类名-->
+        <servlet-class>servletdemo.FirstServlet</servlet-class>
+
+    </servlet>
+    <!--配置映射关系-->
+    <servlet-mapping>
+        <!--servlet的名字-->
+        <servlet-name>FirstServlet</servlet-name>
+        <!--指定在浏览器中访问的servlet的URL-->
+        <!--表示通过http://localhost:8080/demo才能访问到！-->
+        <url-pattern>/demo</url-pattern>
+
+    </servlet-mapping>
+
+    <!--listener的配置，只需要配置其完整的类名就可以了-->
+    <listener>
+        <listener-class>listenerdemo.FirstListener</listener-class>
+    </listener>
+</web-app>
